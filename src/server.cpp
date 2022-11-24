@@ -9,6 +9,13 @@
 
 #define PORT 1234
 
+
+int csend(char* msg){
+    int size = strlen(msg);
+    
+    ssize_t ret = send(cfd, size, 1024);
+}
+
 int main(){
     // createsocket struct
 	struct sockaddr_in server_info = {0};
@@ -50,13 +57,7 @@ int main(){
 
    std::cout << "Get connection: " << std:endl;
 
-
+    csend("yoyo");
     
     return 0;
-}
-
-int csend(char* msg){
-    int size = strlen(msg);
-    
-    ssize_t ret = send(cfd, )
 }
