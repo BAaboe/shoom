@@ -1,4 +1,4 @@
 build/*
-main
-server
-client
+./main
+./server
+./client
