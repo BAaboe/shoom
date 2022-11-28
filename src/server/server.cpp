@@ -8,7 +8,7 @@
 #include <arpa/inet.h>
 
 
-
+#define 0 1
 #define PORT 1234
 
 //plz work
