@@ -13,15 +13,24 @@ O=./build
 S=./src
 
 # not too sophisticated dependency
-OBJS=				\
+SOBJ=				\
+
+COBJ=				\
 
 all:	 $(O)/main
+
+server:  $(O)/server
 
 clean:
 	rm -f ./build/*.o
 
 run: all
 	./main
+
+
+$(O)/server:	$(OBJS) $(O)/server.o
+	$(CC) $(CFLAGS) $(OBJS) $(O)/server.o \
+	-o server $(LIBS)
 
 $(O)/main:	$(OBJS) $(O)/main.o
 	$(CC) $(CFLAGS) $(OBJS) $(O)/main.o \
