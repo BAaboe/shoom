@@ -10,14 +10,15 @@ CFLAGS=-g -Wall -L/usr/X11R6/lib -lX11# -DUSEASM
 
 # subdirectory for objects
 O=./build
-S=./src
+CS=./src/client
+SS=./src/server
 
 # not too sophisticated dependency
 SOBJ=				\
 
 COBJ=				\
 
-all:	 $(O)/main
+all:	 $(O)/server $(O)/client
 
 server:  $(O)/server
 
@@ -28,15 +29,19 @@ run: all
 	./main
 
 
-$(O)/server:	$(OBJS) $(O)/server.o
+$(O)/server:	$(SOBJ) $(O)/server.o
 	$(CC) $(CFLAGS) $(OBJS) $(O)/server.o \
 	-o server $(LIBS)
 
-$(O)/main:	$(OBJS) $(O)/main.o
-	$(CC) $(CFLAGS) $(OBJS) $(O)/main.o \
-	-o main $(LIBS)
+$(O)/client:	$(COBJ) $(O)/client/client.o
+	$(CC) $(CFLAGS) $(OBJS) $(O)/client/client.o \
+	-o client $(LIBS)
 
-$(O)/%.o:	$(S)/%.cpp
+$(O)/client/%.o:	$(CS)/%.cpp
+	$(CC) $(CFLAGS) -c $< -o $@
+
+
+$(O)/server/%.o:	$(SS)/%.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 #############################################################
