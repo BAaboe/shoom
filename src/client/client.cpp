@@ -11,6 +11,17 @@
 
 using namespace std;
 
+char* srecv(int fd){
+    char size[512] = {0};
+    ssize_t recvd = recv(fd, size, 512, 0);
+    int isize = atoi(size);
+    char *buf = new char[isize];
+    recvd = recv(fd, buf, isize, 0);
+
+    return buf;
+}
+
+
 int main(int argc, char *argv[]){
 
     
@@ -40,13 +51,8 @@ int main(int argc, char *argv[]){
         return -1;
     }
 
-    char size[512] = {0};
-    ssize_t recvd = recv(sock, size, 512, 0);
-    int isize = atoi(size);
-    char *buf = new char[isize];
-    recvd = recv(sock, buf, isize, 0);
+    char *buf = srecv(sock);
     
-
     cout << buf << endl;
 
     delete [] buf;
