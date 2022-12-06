@@ -29,8 +29,8 @@ run: all
 	./main
 
 
-$(O)/server:	$(SOBJ) $(O)/server.o
-	$(CC) $(CFLAGS) $(OBJS) $(O)/server.o \
+$(O)/server:	$(SOBJ) $(O)/server/server.o
+	$(CC) $(CFLAGS) $(OBJS) $(O)/server/server.o \
 	-o server $(LIBS)
 
 $(O)/client:	$(COBJ) $(O)/client/client.o

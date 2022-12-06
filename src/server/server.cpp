@@ -8,10 +8,8 @@
 #include <arpa/inet.h>
 
 
-#define 0 1
 #define PORT 1234
 
-//plz work
 
 ssize_t ssend(char* msg, int cfd){
     unsigned int size = sizeof(msg);
@@ -19,18 +17,18 @@ ssize_t ssend(char* msg, int cfd){
     strcpy(sizeChar,std::to_string(size).c_str());
     ssize_t ret = send(cfd, sizeChar, 512, 0);
     ret = send(cfd, msg, size, 0);
-    
+
     return ret;
 }
 
 int main(){
     // createsocket struct
-	struct sockaddr_in server_info = {0};
-	server_info.sin_family = AF_INET;
+    struct sockaddr_in server_info = {0};
+    server_info.sin_family = AF_INET;
     server_info.sin_port = htons(PORT);
 
     struct sockaddr client_info = {0};
-    
+
     socklen_t server_info_len = sizeof(server_info);
     socklen_t client_info_len = sizeof(client_info);
 
@@ -53,19 +51,21 @@ int main(){
         perror("listen");
         return -1;
     }
-   
-   std::cout << "listening... " << std::endl;
 
-   //accept
-   int cfd = accept(sfd, &client_info, &client_info_len);
-   if(0 > cfd){
-       perror("accept");
-   }
+    std::cout << "listening... " << std::endl;
+
+    //accept
+    int cfd = accept(sfd, &client_info, &client_info_len);
+    if(0 > cfd){
+        perror("accept");
+    }
 
 
-   std::cout << "Got connection: " << std::endl;
+    std::cout << "Got connection: " << std::endl;
 
-   ssize_t ret = ssend("yoyo", cfd);
-    
-   return 0;
+    ssize_t ret = ssend("sick", cfd);
+
+
+    close(sfd);
+    return 0;
 }
