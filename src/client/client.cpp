@@ -12,8 +12,9 @@
 using namespace std;
 
 char* srecv(int fd){
-    char size[512] = {0};
-    ssize_t recvd = recv(fd, size, 512, 0);
+    char size[4] = {0};
+    ssize_t recvd = recv(fd, size, 4, 0);
+    std::cout << size << std::endl;
     int isize = atoi(size);
     char *buf = new char[isize];
     recvd = recv(fd, buf, isize, 0);
