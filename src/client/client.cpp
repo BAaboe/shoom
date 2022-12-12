@@ -4,6 +4,7 @@
 #include <netinet/in.h>
 #include <stdio.h>
 #include <string.h>
+#include <string>
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -12,10 +13,10 @@
 using namespace std;
 
 char* srecv(int fd){
-    char size[4] = {0};
-    ssize_t recvd = recv(fd, size, 4, 0);
-    std::cout << size << std::endl;
-    int isize = atoi(size);
+    char size[128] = {0};
+    ssize_t recvd = recv(fd, size, 128, 0);
+    int isize  = atoi(size);
+
     char *buf = new char[isize];
     recvd = recv(fd, buf, isize, 0);
 

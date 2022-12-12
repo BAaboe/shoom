@@ -14,13 +14,9 @@
 
 ssize_t ssend(std::string msg, int cfd){
     unsigned int size = msg.size();
-
-    unsigned char hex_size[5];
-    snprintf((char*)hex_size, sizeof(hex_size), "%x", 4294967295);
-    //PLZ WORK
-    unsigned char test[] = {0xff,0xff,0xff,0xff};
-    //strcpy(sizeChar,std::to_string(size).c_str());
-    ssize_t ret = send(cfd, hex_size, 4, 0);
+    char sizeChar[128];
+    strcpy(sizeChar,std::to_string(size).c_str());
+    ssize_t ret = send(cfd, sizeChar, 128, 0);
     ret = send(cfd, msg.c_str(), size, 0);
 
     return ret;
